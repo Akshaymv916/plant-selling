@@ -1,0 +1,89 @@
+{% load static %}
+{% load gettotal %}
+<aside class="aside">
+    <div class="side-panel " data-side-panel="wishlist">
+      <button class="panel-close-btn" aria-label="slide wishlist" data-panel-btn="wishlist">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+    {% if 'users' in request.session %}
+    {% for i in wish %}
+    <ul class="panel-list">
+      <li class="panel-item">
+      <a  href="{% url 'singleproduct' i.product_id.id %}" class="panel-card">
+       
+          <figure class="item-banner">
+          <img src="{{i.product_id.image1.url}}" alt="">
+        </figure>
+        <div>
+          <p class="item-title">{{i.product_id.name | truncatewords:3 }}</p>
+          <span class="item-value">{{i.product_id.orginal_price}}</span>
+        </div>
+        <button class="item-close-btn" aria-label="Remove item">
+          <a href="{% url 'removewish' i.product_id.id %}"><ion-icon name="close-outline"></ion-icon></a>
+        </button>
+        </a>
+      </li>
+      {% endfor %}
+
+      {% if wish %}
+      <a href="{% url 'wishlist' %}" class="panel-btn">View wishlist</a>
+      {% else %}
+      <a href="{% url 'allproduct' %}" class="panel-btn">Empty wishlist</a>
+      {% endif %}
+
+    </ul>     
+
+    {% else %}
+    <ul class="panel-list">
+    <a href="{% url 'allproduct' %}" class="panel-btn">Empty wishlist</a>
+    </ul>
+    {% endif %}
+    </div>
+    </div>
+    
+
+
+    <div class="side-panel " data-side-panel="cart">
+      <button class="panel-close-btn" aria-label="slide wishlist" data-panel-btn="cart">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+    {% if 'users' in request.session %}
+    <ul class="panel-list">
+      {% for item in cart.added_items.all %}
+
+      <li class="panel-item">
+        <a href="{% url 'singleproduct' item.product.id %}" class="panel-card">
+        <figure class="item-banner">
+          <img src="{{item.product.image1.url}}" alt="">
+        </figure>
+        <div>
+          <p class="item-title">{{item.product.name | truncatewords:3 }}</p>
+          <span class="item-value">{{item.product.orginal_price}}</span>
+        </div>
+        <button class="item-close-btn" aria-label="Remove item">
+            <a href="{% url 'removeitem' item.id %}"><ion-icon name="close-outline"></ion-icon></a>
+        </button>
+        </a>
+      </li>
+      {% endfor %}
+
+
+     {% if cart.added_items.all %}
+      <div class="subtotal">
+        <p class="subtotal-text">Subtotal:</p>
+        <data class="subtotal-value" value="6453">{{ cart|gettotal }}</data>
+      </div>
+      <a href="{% url 'myorders' %}" class="panel-btn">View Cart</a>
+      {% else %}
+      <a href="{% url 'allproduct' %}" class="panel-btn">Empty cart</a>
+      {% endif %}
+
+    </ul>     
+
+    {% else %}
+    <ul class="panel-list">
+    <a href="{% url 'allproduct' %}" class="panel-btn">Empty cart</a>
+    </ul>
+    {% endif %}
+    </div>
+  </aside>

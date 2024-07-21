@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<body id="top">
+
+     <!-- navbar start -->
+        {% block navbar %}
+        {% include 'navbar.html' %}
+        {% endblock navbar %}
+    <!-- END nav -->    
+
+    {% block popupadd %}
+    {% include 'popupadd.html' %}
+    {% endblock popupadd %}
+
+    {% block sidebar %}
+    {% include 'sidebar.html' %}
+    {% endblock sidebar %}
+
+    {% block loader %}
+    {% include 'loader.html' %}
+    {% endblock loader %}
+
+    
+
+  {% block maincontent %}
+
+
+<script>
+  {% if messages %}
+      {% for message in messages %}
+      Swal.fire({
+          title: "{{message}}",
+          icon: "{{message.tags}}",
+          timer:1800,
+      });
+      {% endfor %}
+  {% endif %}
+
+</script>
+
+
+
+
+
+
+<main>
+    <article>
+
+      <!-- 
+        - #HERO      -->
+
+      <section class="section hero" style="background-image: url({% static 'D:\myproject\indoorplants\static\images\1000324581.jpg' %});">
+        <div class="container">
+          
+     
+
+          <h2 class="h1 hero-title">
+           Transform Your <strong>Home With Indoor Plants</strong>
+          </h2>
+
+          <p class="hero-text">
+            indoor plants bring stunning & vibrant aesthetics along with a wide array of benefits to any space. Elevate your living or office space with a variety of indoor house plants grown and treated with utmost care just for you!
+          </p>
+
+          <button class="btn btn-primary">
+            <a href="{% url 'allproduct' %}"><span style="color:white">Shop Now</span></a>
+
+            <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+          </button>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #COLLECTION
+      -->
+
+      <section class="section product categories">
+        <div class="container">
+
+          <h2 class="h2 section-title">Popular Categories</h2>
+          <div class="category_container swiper">
+            <div class="swiper-wrapper" >
+              {% for category in category %}
+              <a href="{% url 'prodcategory' category.id %}" class="category_item swiper-slide">
+                <img src="{{category.image.url}}" alt="" class="category_image">
+                <h3 class="category_title" style="color:black;">{{category.category_name}}</h3>
+              </a>
+              {% endfor %}
+            </div>
+            <div class="swiper-button-next">
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+            
+            <div class="swiper-button-prev">
+              <i class="fa-solid fa-angle-left"></i>
+            </div>
+          </div> 
+        </div>
+      </section>
+        
+        
+
+
+
+
+
+      <!-- 
+        - #PRODUCT
+      -->
+
+      <section class="section product">
+        <div class="container">
+
+          <h2 class="h2 section-title">Popular Products</h2>
+
+
+          <div class="tab-btns">
+            <span class="tab-btn active-tab">Show All</span>
+            <a href="{% url 'newitem' %}"><span class="tab-btn">New Item</span></a>
+            <a href="{% url 'popular' %}"><span class="tab-btn">Popular Item</span></a>
+          </div>
+          <ul class="product-list">
+            {% for i in product %}
+            <li class="product-item">
+              <div class="product-card" tabindex="0">
+
+                <figure class="card-banner">
+                  <a href="{% url 'singleproduct' i.id %}"><img src="{{i.image1.url}}" width="312" height="350" loading="lazy"
+                    alt="Running Sneaker Shoes" class="image-contain"></a>
+
+                  <div class="card-badge">{{i.condtion}}</div>
+                  <div class="card-offer">{{i.offer}}% offer</div>
+
+
+                  <ul class="card-action-list">
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn" aria-labelledby="card-label-1">
+                       <a href="{% url 'quickaddcart' i.id %}"> <ion-icon name="cart-outline"></ion-icon></a>
+                      </button>
+
+                      <div class="card-action-tooltip" id="card-label-1">Add to Cart</div>
+                    </li>
+
+                    <li class="card-action-item">
+                      <button class="card-action-btn" aria-labelledby="card-label-2">
+                        <a href="{% url 'addwish' i.id %}"><ion-icon name="heart-outline"></ion-icon></a>
+                      </button>
+
+                      <div class="card-action-tooltip" id="card-label-2">Add to Whishlist</div>
+                    </li>
+
+
+                  </ul>
+                </figure>
+
+                <div class="card-content">
+
+                  <div class="card-cat">
+                    <a href="#" class="card-cat-link">{{i.category}}</a> 
+                  </div>
+
+                  <h3 class="h3 card-title">
+                    <a href="#">{{i.name}}</a>
+                  </h3>
+
+                  <data class="card-price" value="180.85"><i class="fa fa-rupee">&nbsp;</i>{{i.orginal_price}}</data>
+
+                </div>
+
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </section>
+
+
+
+
+
+      <!-- 
+        - #CTA
+      -->
+    </article>
+  </main>
+
+
+  <section class="section service">
+    <div class="container">
+
+      <ul class="service-list">
+
+        <li class="service-item">
+          <div class="service-card">
+
+            <div class="card-icon">
+              <img src="{% static 'images/service-4.png' %}" width="40" height="40" loading="lazy" alt="Service icon">
+            </div>
+
+            <div>
+              <h3 class="h4 card-title">24/7 Support</h3>
+
+              <p class="card-text">
+                Get Quick Support
+              </p>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-card">
+
+            <div class="card-icon">
+              <img src="{% static 'images/service-1.png' %}" width="53" height="28" loading="lazy" alt="Service icon">
+            </div>
+
+            <div>
+              <h3 class="h4 card-title">Free Shiping</h3>
+
+              <p class="card-text">
+                All orders over <span>$150</span>
+              </p>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-card">
+
+            <div class="card-icon">
+              <img src="{% static 'images/service-3.png' %}" width="40" height="40" loading="lazy" alt="Service icon">
+            </div>
+
+            <div>
+              <h3 class="h4 card-title">Free Returns</h3>
+
+              <p class="card-text">
+                Money back in 30 days
+              </p>
+            </div>
+
+          </div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-card">
+
+            <div class="card-icon">
+              <img src="{% static 'images/service-2.png' %}" width="43" height="35" loading="lazy" alt="Service icon">
+            </div>
+
+            <div>
+              <h3 class="h4 card-title">Quick Payment</h3>
+
+              <p class="card-text">
+                100% secure payment
+              </p>
+            </div>
+
+          </div>
+        </li>
+
+        
+
+      </ul>
+
+    </div>
+  </section>
+
+  <a href="#top" class="go-top-btn" data-go-top>
+    <ion-icon name="arrow-up-outline"></ion-icon>
+  </a>
+
+  <a href="#top" class="social-top-btn" social-go-top>
+    <ion-icon name="logo-whatsapp"></ion-icon>
+      </a>
+
+  <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+  <script>
+
+    var loader=document.getElementById("loader");
+    var close=document.getElementById("close-icon");
+      window.addEventListener("load",function(){
+          loader.style.display="block"
+
+      })
+
+      close.addEventListener("click", function() {
+            closeloader();
+        });
+
+        function closeloader(){
+            loader.style.display = "none";
+        }
+  </script>
+
+  {% endblock maincontent %}
+
+</body>
+   

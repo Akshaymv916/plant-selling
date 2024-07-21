@@ -1,0 +1,175 @@
+h1 {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size:20px;
+    margin: 0;
+  }
+i {
+  color: #9ABC66;
+  font-size: 100px;
+  line-height: 200px;
+  margin-left:-15px;
+}
+.card {
+  background: white;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 2px 3px #C8D0D8;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.thankyou .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.order-cancel{
+    padding: 18px 30px; 
+			border: none; 
+			border-radius: 8px; 
+			cursor: pointer; 
+            font-weight: 600;
+            font-size: 16px;
+            background-color: rgb(249, 6, 6); 
+			color: #fff; 
+}
+
+.cancel-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-btn:hover{
+    opacity: .8;
+}
+
+
+
+/* popup box */
+
+btn-open-popup { 
+    padding: 12px 24px; 
+    font-size: 18px; 
+    background-color: green; 
+    color: #fff; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+} 
+
+.btn-open-popup:hover { 
+    background-color: #4caf50; 
+} 
+
+.overlay-container { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.6); 
+    justify-content: center; 
+    align-items: center; 
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+} 
+
+.popup-box { 
+    background: #fff; 
+    padding: 24px; 
+    border-radius: 12px; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); 
+    width: 420px; 
+    text-align: center; 
+    opacity: 0; 
+    transform: scale(0.8); 
+    animation: fadeInUp 0.5s ease-out forwards; 
+} 
+
+.form-container { 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
+
+.form-label { 
+    margin-bottom: 10px; 
+    font-size: 16px; 
+    color: #444; 
+    text-align: left; 
+} 
+
+.form-textarea { 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    font-size: 16px; 
+} 
+
+.btn-submit, 
+.btn-close-popup { 
+    padding: 12px 30px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+} 
+
+
+.btn-submit { 
+    background-color: green; 
+    color: #fff; 
+    width: 50%;
+} 
+
+.btn-close-popup { 
+    margin-top: 12px; 
+    background-color: #e74c3c; 
+    color: #fff;
+} 
+
+.btn-submit:hover, 
+.btn-close-popup:hover { 
+    background-color: #4caf50; 
+} 
+
+/* Keyframes for fadeInUp animation */ 
+@keyframes fadeInUp { 
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    } 
+
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+} 
+
+/* Animation for popup */ 
+.overlay-container.show { 
+    display: flex; 
+    opacity: 1; 
+}

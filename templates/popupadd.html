@@ -1,0 +1,39 @@
+{% load static %}
+
+<style>
+  #loader .items{
+    position:absolute;
+    top:10px;
+    left:10px;
+    padding:10px 20px;
+    background-color:green;
+    color:white;
+    border-radius:10px;
+    font-size:17px;
+    opacity:.9
+  }
+</style>
+
+
+<div  id="loader">
+  
+    <img class="mainimg"src="{{offer.image1.url}}" >
+      <div class="items">{{offer.quantity}}&nbsp;left</div>
+    <div class="offer-text">
+      <h2>get&nbsp;{{offer.offer}}%&nbsp;off</h2>
+      <small style="font-size:25px">{{offer.name}}</small>
+      <a href="{% url 'singleproduct' offer.id %}">Purchase Now</a>
+      <form>
+        <input type="email" placeholder="email address">
+        <button type="submit">Sub scribe</button>
+      </form>
+    </div>
+    <img src="{% static 'images/close.png' %}" class="close-icon" onclick="closeloader()">
+  </div>
+
+  <script>
+    setTimeout(function () { 
+      loader.style.display='none';
+   }, 4000);
+  </script>
+

@@ -1,0 +1,122 @@
+.review .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+	background:#FFF;
+	padding: 2rem;
+	max-width: 576px;
+	width: 100%;
+	border-radius: .75rem;
+	box-shadow: 8px 8px 30px rgba(0,0,0,.05);
+	text-align: center;
+}
+.wrapper h3 {
+	font-size: 2.5rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+.rating-value[rating-value="1"] { --star-rev: 1}
+.rating-value[rating-value="2"] { --star-rev: 2}
+.rating-value[rating-value="3"] { --star-rev: 3}
+.rating-value[rating-value="4"] { --star-rev: 4}
+.rating-value[rating-value="5"] { --star-rev: 5}
+
+.rating-value {
+  /* More info for the below CSS you                  */
+  /* can find on Kevin Powell Tutorial                */
+  /* https://youtu.be/oiai47goI6A?si=b2NkafopvHX3VTlb */
+  
+  --_star-size: .4rem;
+  --_gap: var(--space);
+
+  --gap-max-size: min(var(--_gap), var(--_star-size) / 5);
+  --gap-calc: calc( (var(--star-rev, 0) - 1) * var(--gap-max-size) );
+
+  height: var(--_star-size);
+  width: calc(var(--star-rev, 0) * var(--_star-size) + var(--gap-calc));
+  background-image: 
+    url(https://api.iconify.design/material-symbols:star-rounded.svg?color=%23f0ad4e);
+  background-repeat: space no-repeat;
+  background-size: var(--_star-size);
+}
+
+
+/* Second section */
+.your-review {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+
+.your-review > input {
+  display: none;
+}
+
+.your-review > label {
+  cursor: pointer;
+  width: 3.2rem;
+  aspect-ratio: 1;
+  background-image: 
+    url(https://api.iconify.design/material-symbols:star-rounded.svg?color=%23eeeeee);
+  background-repeat: space no-repeat;
+  background-position: center;
+  background-size: 76%;
+  transition: all .3s;
+}
+
+.your-review > input:checked ~ label,
+.your-review > input:checked ~ label ~ label {
+  background-image:
+    url(https://api.iconify.design/material-symbols:star-rounded.svg?color=%23f0ad4e);
+}
+
+.your-review > input:not(:checked) ~ label:hover,
+.your-review > input:not(:checked) ~ label:hover ~ label {
+  background-image: 
+    url(https://api.iconify.design/material-symbols:star-rounded.svg?color=%23f0ad4e);
+}
+textarea {
+	width: 100%;
+	background:#F5F5F5;
+	padding: 5rem;
+	border-radius: .5rem;
+	border: none;
+	outline: none;
+	resize: none;
+	margin-bottom: 2rem;
+	margin-top: 2rem;
+}
+.btn-group {
+	display: flex;
+	grid-gap: .5rem;
+	align-items: center;
+}
+.btn-group .btn {
+	padding: 1.2rem 2rem;
+	border-radius: .5rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	font-size:1.5rem;
+	font-weight: 500;
+}
+.btn-group .btn.submit {
+	background: #4383FF;
+}
+.btn-group .btn.submit:hover {
+	background:#3278FF;
+}
+.btn-group .btn.cancel {
+	background:white;
+	color:#4383FF;
+}
+.fbtn-group .btn.cancel:hover {
+	background:#F5F5F5;
+}
+
+
+
+

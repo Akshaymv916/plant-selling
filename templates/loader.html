@@ -1,0 +1,20 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/loader.css' %}">
+
+
+
+<div id="load"></div>
+
+
+<script>
+    var load=document.getElementById(".load")
+    window.addEventListener("load",function(){
+    load.style.display="none";
+
+    setTimeout(function () {
+		$('.load').fadeToggle();
+	}, 1500);
+	
+})
+</script>

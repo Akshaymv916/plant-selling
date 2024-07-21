@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/productfilter.css' %}">
+
+<script>
+  {% if messages %}
+    {% for message in messages %}
+      Swal.fire({
+        title: "{{ message }}",
+        icon: "{{ message.tags }}",
+        timer: 1800,
+      });
+    {% endfor %}
+  {% endif %}
+</script>
+
+<section class="section product" id="section">
+    <div class="container">
+        {% if product %}
+        <div class="pro-filter f-right">
+                <select name="category" id="category-filter" onchange="window.location.href=this.value">
+                    {% for i in category %}
+                    <option hidden>Filter category</option>
+                    <option value="{% url 'filtercategory' i.id %}">{{i.category_name}}</option>                    
+                    {% endfor %}
+                </select>
+
+                <select name="price" id="price-filter" onchange="window.location.href=this.value">
+                    {% for i in fprice %}
+                    <option hidden>Filter price</option>
+                    <option value="{% url 'filterprice' i.id %}">{{i.price}}</option>
+                    {% endfor %}
+                </select>
+                <select name="price" id="price-filter" onchange="window.location.href=this.value">
+                    <option hidden>Stock</option>
+                    <option value="{% url 'filterstock' 0 %}">In stock</option>
+                    <option value="{% url 'filterstock' 1 %}">Out of stock</option>
+                </select>
+
+            <h4 style="color:red; margin-left:400px">{{ procount }} Products</h4>
+        </div>
+
+        <ul class="product-list">
+            {% for i in product %}
+            <li class="product-item">
+                <div class="product-card" tabindex="0">
+                    <figure class="card-banner">
+                        <a href="{% url 'singleproduct' i.id %}">
+                            <img src="{{ i.image1.url }}" width="312" height="350" loading="lazy" alt="{{ i.name }}" class="image-contain">
+                        </a>
+                        <div class="card-badge">{{ i.condtion }}</div>
+                        <div class="card-offer">{{ i.offer }}% offer</div>
+                        <ul class="card-action-list">
+                            <li class="card-action-item">
+                                <button class="card-action-btn" aria-labelledby="card-label-1">
+                                    <a href="{% url 'quickaddcart' i.id %}"><ion-icon name="cart-outline"></ion-icon></a>
+                                </button>
+                                <div class="card-action-tooltip" id="card-label-1">Add to Cart</div>
+                            </li>
+                            <li class="card-action-item">
+                                <button class="card-action-btn" aria-labelledby="card-label-2">
+                                    <a href="{% url 'addwish' i.id %}">
+                                    <ion-icon name="heart-outline"></ion-icon></a>
+                                </button>
+                                <div class="card-action-tooltip" id="card-label-2">Add to Wishlist</div>
+                            </li>
+                        </ul>
+                    </figure>
+                    <div class="card-content">
+                      <div class="card-cat">
+                        {% if i.reviews.ratings >= 1  %}
+                            {% if i.reviews.ratings > 0 %} <i class="fa-solid fa-star" style="color:red"></i>   {% else %} <i class="fa-regular fa-star"></i> {%endif%}
+                            {% if i.reviews.ratings > 1 %} <i class="fa-solid fa-star" style="color:red"></i>   {% else %} <i class="fa-regular fa-star"></i> {%endif%}
+                            {% if rating.ratings > 2 %} <i class="fa-solid fa-star" style="color:red"></i>   {% else %} <i class="fa-regular fa-star"></i> {%endif%}
+                            {% if rating.ratings > 3 %} <i class="fa-solid fa-star" style="color:red"></i>   {% else %} <i class="fa-regular fa-star"></i> {%endif%}
+                            {% if rating.ratings > 4 %} <i class="fa-solid fa-star" style="color:red"></i>   {% else %} <i class="fa-regular fa-star"></i> {%endif%}
+                            {% endif %}
+                      </div>
+                        <div class="card-cat">
+                            <a href="#" class="card-cat-link">{{ i.category }}</a>
+                        </div>
+                        <h3 class="h3 card-title">
+                            <a href="{% url 'singleproduct' i.id %}">{{ i.name }}</a>
+                        </h3>
+                        <data class="card-price" value="{{ i.orginal_price }}">
+                            <i class="fa fa-rupee">&nbsp;</i>{{ i.orginal_price }}
+                        </data>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination p8">
+            
+          <ul>
+                {% if product.has_previous %}
+              <a class="is-active" href="?page={{product.previous_page_number}}"><li>Prev</li></a>
+              {% endif %}
+              {% if product.has_next %}
+              <a href="?page={{product.next_page_number}}"><li>Next</li></a>
+              {% endif %}
+              </ul>
+        </div>
+        {% else %}
+        <div class="pro-filter f-right">
+            <select name="category" id="category-filter" onchange="window.location.href=this.value">
+                {% for i in category %}
+                <option hidden>Filter category</option>
+                <option value="{% url 'filtercategory' i.id %}">{{i.category_name}}</option>                    
+                {% endfor %}
+            </select>
+
+            <select name="price" id="price-filter" onchange="window.location.href=this.value">
+                {% for i in fprice %}
+                <option hidden>Filter price</option>
+                <option value="{% url 'filterprice' i.id %}">{{i.price}}</option>
+                {% endfor %}
+            </select>
+            <select name="price" id="price-filter" onchange="window.location.href=this.value">
+                <option hidden>Stock</option>
+                <option value="{% url 'filterstock' 0 %}">In stock</option>
+                <option value="{% url 'filterstock' 1 %}">Out of stock</option>
+            </select>
+        <h4 style="color:red; margin-left:400px">0 Products</h4>
+    </div>
+        <h2 style="color:black;text-align:center;">No results </h2>
+
+        {% endif %}
+    </div>
+</section>
+
+<!-- Footer start -->
+{% include 'footer.html' %}
+<!-- Footer end -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+<!-- END nav -->    
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<script>
+  {% if messages %}
+      {% for message in messages %}
+      Swal.fire({
+          title: "{{message}}",
+          icon: "{{message.tags}}",
+          timer:1300,
+      });
+      {% endfor %}
+  {% endif %}
+
+</script>
+
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+  
+<section id="main-container" class="section"> 
+
+    <!-- Login Form -->
+    <div id="login-form">
+        <form method="post" action="{% url 'verify' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div id="password-container">
+            <label style="font-size:25px;padding-left:20px">OTP VERIFICATION</label>
+            <P style="font-size:15px;">4 digit code send to your email id.Check it!</p>
+            <div id="password-elements">
+                <input type="text" placeholder="Enter otp" id="password" name="otp"  required style="background-color: white;
+                color:black;"/>
+                <input type="number" name="userid" value="{{userid}}" hidden>
+            </div>
+        </div>
+
+        <div id="checkbox-login-container">
+          <div class="checkbox-container">
+          </div>
+            <button id="login-btn" type="submit">Verify</button>
+        </div>
+    </form>
+    </div>
+    </section>
+
+    <script>
+        var success=document.getElementById('success');
+        var danger=document.getElementById('danger');
+        setTimeout(function () { 
+         success.style.display='none';
+      }, 3000); 
+      setTimeout(function () { 
+        danger.style.display='none';
+     }, 3000); 
+
+
+      </script>
+  
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+{% endblock %}

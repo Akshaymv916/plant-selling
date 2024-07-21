@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+    
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+  
+
+    <section class="section checkout">
+        <div class="container">
+    
+            <form action="{% url 'checkout' %}" class="checkform" id="myform" method='post'>
+                {% csrf_token %}
+        
+                <div class="row">
+        
+                    <div class="col">
+        
+                        <h3 class="title">billing address</h3>
+        
+                        <div class="inputBox">
+                            <span>full name :</span>
+                            <input type="text" placeholder="Enter full name" value="{{address.name}}" readonly required/>
+                        </div>
+                        <div class="inputBox">
+                            <span>email :</span>
+                            <input type="email" placeholder="example@example.com" value="{{address.user.email}}" readonly required/>
+                        </div>
+                        <div class="inputBox">
+                            <span>Country :</span>
+                            <input type="text" placeholder="country" value={{address.country}} readonly required/>
+                        </div>
+                        <div class="inputBox">
+                            <span>state :</span>
+                            <input type="text" placeholder="state" value={{address.state}} readonly required/>
+                        </div>
+                        <div class="inputBox">
+                            <span>District :</span>
+                            <input type="text" placeholder="state" value={{address.district}} readonly required/>
+                        </div>
+                        <div class="inputBox">
+                            <span>Landmark :</span>
+                            <input type="text" placeholder="state" value={{address.landmark}} readonly required/>
+                        </div>
+        
+                        <div class="flex">
+                            <div class="inputBox">
+                                <span>Number :</span>
+                                <input type="number" placeholder="district" value={{address.user.number}} readonly required/>
+                            </div>
+                            <div class="inputBox">
+                                <span>pin code :</span>
+                                <input type="number" placeholder="123 456" min="0" value={{address.pincode}} readonly required/>
+                            </div>
+                        </div>
+        
+                    </div>
+        
+                    <div class="col">
+        
+                        <h3 class="title">Total ammout </h3>
+
+        
+                        <div class="inputBox">
+                            <input type="text" placeholder="Enter full name" value="{{total}}" name="total" readonly>
+                            <input type="text" placeholder="Enter full name" value="{{order_id}} Rs" readonly hidden>
+                            <input type="text" placeholder="Enter full name" value="{{payment}} Rs" readonly hidden>
+
+                        </div>
+                        </div>
+        
+            
+                </div>
+        
+              
+                <button type="submit" class="submit-btn" style="font-size:20px"><a id="rzp-button1">Upi payment</a></button>
+                <input type="text" placeholder="Enter full name" value="{{total}}" name="total" hidden readonly>
+                &nbsp;
+               <button type="submit" class="submit-btn" style="font-size:20px">Cash on delivery</button>
+
+                &nbsp;
+
+            </form>
+        
+        </div>   
+      </section>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <form action="{% url 'success' %}" method='POST'>
+        <input type="text" name="user" value="{{user}}" hidden>
+        {% csrf_token %}
+        <script >
+        var options = {
+            "key": "rzp_test_MrcFBm65u39qex",
+            "amount": "{{total}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Green Life",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            "order_id": "{{order_id}}",
+            "callback_url": "http://127.0.0.1:8000/success/",
+            "handler": function (response){
+                console.log("success");
+                var form = document.getElementById("myform");
+                var custid ={{"user"}};
+                 window.location.href = `http://localhost:8000/success?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}&cust_id=${response.custid}`;
+            },
+            "prefill": {
+                "name": "{{user}}",
+                "email": "{{user.email}}",
+                "contact": "{{user.number}}"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+        </script>
+    </form>
+
+        
+    <script>
+        var success=document.getElementById('success');
+        var danger=document.getElementById('danger');
+        setTimeout(function () { 
+         success.style.display='none';
+      }, 3000); 
+      setTimeout(function () { 
+        danger.style.display='none';
+     }, 3000); 
+
+
+      </script>
+  
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+{% endblock %}

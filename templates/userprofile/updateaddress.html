@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+    {% include 'sidebar.html' %}
+    
+    {% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+<style>
+   .danger {
+     padding: 10px;
+     background-color: #f44336;
+     color: white;
+     opacity:1;
+   }
+
+   .success{
+       padding: 10px;
+     background-color: green;
+     color: white;
+     opacity:1;
+   }
+   
+   .closebtn {
+     margin-left: 15px;
+     color: white;
+     font-weight: bold;
+     float: right;
+     font-size: 22px;
+     line-height: 20px;
+     cursor: pointer;
+     transition: 0.3s;
+   }
+   
+   .closebtn:hover {
+     color: black;
+   }
+   </style>
+
+
+
+<section class="section">
+    <div class="update-profile">
+           <form action="{% url 'updateuseraddress' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="danger alert-danger" id="danger">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% else %}
+      <div class="success alert-success" id="success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% endif %}
+      {% endfor %}
+              <div class="flex">
+               <div class="inputBox">
+                  <span>Name :</span>
+                  <input type="text" name="name" value="{{address.name}}" class="box" required/>
+                  <span>Country :</span>
+                  <input type="text" name="country" value="{{address.country}}" class="box" required/>
+                  <span>District :</span>
+                  <input type="text" name="dis" value="{{address.district}}" class="box" required/>
+                  <span>State :</span>
+                  <input type="text" name="state" value="{{address.state}}" class="box" required/>
+               </div>
+               <div class="inputBox">
+                  <span>City :</span>
+                  <input type="text" name="city" value="{{address.city}}" class="box" required/>
+                  <span>Landmark :</span>
+                  <input type="text" name="land" value="{{address.landmark}}" class="box" required/>
+                  <span>Pincode :</span>
+                  <input type="number" name="pin" min="0" value="{{address.pincode}}" class="box" required/>
+                  <input type="number" name="addid" min="1" value="{{addid}}" class="box" hidden required/>
+
+               </div>
+              </div>
+              <input type="submit" value="Update address" name="update_profile" class="btns">
+        </form>
+     </div>
+     </section>
+
+<!-- foooter start -->
+{% include 'footer.html' %}
+<!-- footer end -->
+  
+  {% endblock %}

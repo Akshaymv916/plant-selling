@@ -1,0 +1,205 @@
+
+.mode-container {
+    position: relative;
+}
+
+#themeIcon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#toggle-paragraph {
+    display: none;
+    font-size: 13px;
+    position: absolute;
+    top: -1rem;
+    right: -2.5rem;
+    width: 115px;
+}
+
+#nav-line {
+    width: 100%;
+    border-top: 0.5px solid #dfdcdc;
+}
+
+@media (max-width:768px) {
+    header {
+        padding: 0 3rem 0 1rem;
+    }
+}
+
+/* Signup Section */
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 2rem 5rem 2rem;
+    position: relative;
+}
+
+#validationMessage {
+    background-color: #ff0000;
+    color: #ffffff;
+    width: 30rem;
+    padding: 15px;
+    margin: 15px 0;
+    font-weight: 600;
+    display: none;
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-label-container {
+    cursor: pointer;
+}
+
+.avatar-image-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow:visible;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #1ed760;
+}
+
+.avatar-preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.avatar-default-icon {
+    font-size: 50px;
+    color: #757676;
+}
+
+.avatar-upload-input {
+    display: none;
+}
+
+.email-container,
+.user-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#username,
+#email,
+#password-elements {
+    outline: none;
+    background-color: white;
+    color: #0b0a0a;
+    border: 1px solid #757676;
+    border-radius: 8px;
+    width: 30rem;
+    padding: 14px 15px;
+    margin: 10px 0px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#password-elements {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#password {
+    background-color: white;
+    color: #0e0d0d;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 500;
+    width: 80%;
+}
+
+#eye-icon {
+    color: #ff0000;
+}
+
+label {
+    font-weight: bold;
+}
+
+a {
+    color: #000000;
+    font-weight: 600;
+    margin: 12px 0px;
+}
+
+
+#signup-btn {
+    background-color: #1ed760;
+    width: 10rem;
+    padding: 13px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+}
+
+.bottom-line {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #d9dadc;
+    width: 470px;
+}
+
+#login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#login-btn {
+    width: 30rem;
+    padding: 12px 0px;
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #757676;
+    border: 1px solid #757676;
+    text-transform: uppercase;
+}
+
+@media (max-width: 550px) {
+
+    #username,
+    #email,
+    #password-elements,
+    #validationMessage,
+    #login-btn,
+    .bottom-line {
+        width: 90vw;
+    }
+}
+
+
+
+/* Hover Efect */
+
+#signup-btn:hover {
+    transform: scale(1.05);
+}

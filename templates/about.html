@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+{% block maincontent %}
+
+
+<section class="section cart">
+    <div class="container">
+        <div class="aboutus">
+            <h2>About us</h2>
+            <p style="font-size:25px">Born in 2018,Green Life is the pioneer in India to bring about and promote the concept of Green Gifting – “Gift a Plant”. The concept of gifting a plant was the adrenaline for this venture. The idea was to replace bouquets and other monotonous, traditional gifts with live plants.
+                Since its conception, Nurturing Green has not only captured the gifting arena, but has also changed the way people market their brand and take it to new levels with Green Marketing and Gifting.
+                The minds and hands behind Nurturing Green are a team of young, passionate professionals with an eye to detail and strong emphasis on quality to ensure that we offer you the latest products with the best quality. Our teams, who are gardening enthusiasts, ensure that every product that goes out matches world class quality standards.</p>
+
+            <h2>Mission</h2>
+            <p>Our mission at Nurturing Green is to carry on the legacy that we have created, the trends we have set in gifting and decor and become a symbol of Green Gifting, Green Decor, Landscaping and related services in India. We seek to achieve this by inculcating a sense of responsibility in one and all towards our environment.</p>
+        
+            <h2>Vision</h2>
+            <p>Continuously look for new opportunities to make a positive contribution to the global environment by bringing people closer to nature.</p>
+        </div>
+    </div>
+</section>
+  
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+{% endblock %}

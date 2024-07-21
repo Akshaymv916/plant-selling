@@ -1,0 +1,10 @@
+#load{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background: #000000 url(/static/images/Youtube_loading_symbol_1_\(wobbly\).gif) no-repeat center center;
+    transition: opacity 0.95s,visibility 0.75s;
+    background-size: 4%;
+
+}

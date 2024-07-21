@@ -1,0 +1,187 @@
+
+.mode-container {
+    position: relative;
+}
+
+
+
+@media (max-width:768px) {
+    header {
+        padding: 0 3rem 0 1rem;
+    }
+}
+
+
+/* Login Section */
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20rem 2rem 10rem 2rem;
+    position: relative;
+}
+
+#validationMessage {
+    background-color: #ff0000;
+    color: #ffffff;
+    width: 30rem;
+    padding: 15px;
+    margin: 15px 0;
+    font-weight: 600;
+    display: none;
+}
+
+.email-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#email,
+#password-elements {
+    outline: none;
+    background-color: white;
+    color:black;
+    border: 1px solid #757676;
+    border-radius: 8px;
+    width: 30rem;
+    padding: 14px 15px;
+    margin: 10px 0px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#password-elements {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+#login-password {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 500;
+    width: 80%;
+}
+
+#eye-icon {
+    color: #ff0000;
+}
+
+label {
+    font-weight: bold;
+}
+
+a {
+    color: #000000;
+    font-weight: 600;
+}
+
+#checkbox-login-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#checkbox-login-container p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#check-box {
+    width: 16px;
+    height: 16px;
+    accent-color: #169b45;
+}
+
+input[type="checkbox"]:focus {
+    outline-offset: 4px;
+}
+
+#login-btn {
+    background-color: #1ed760;
+    width: 10rem;
+    padding: 13px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+}
+
+.bottom-line {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #d9dadc;
+    width: 470px;
+}
+
+#sign-up-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#signup-btn {
+    width: 30rem;
+    padding: 12px 0px;
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #757676;
+    border: 1px solid #757676;
+    text-transform: uppercase;
+}
+
+@media (max-width: 550px) {
+
+    #signup-btn,
+    #email,
+    #password-elements,
+    #validationMessage,
+    .bottom-line {
+        width: 90vw;
+    }
+    .password-container p{
+        padding-left: 26px;
+    }
+}
+
+
+/* Hover Efect */
+
+.forgot-paragraph {
+    margin-bottom: 1rem;
+}
+
+.forgot-paragraph:hover {
+    color: #169b45;
+}
+
+#login-btn:hover {
+    transform: scale(1.05);
+}
+

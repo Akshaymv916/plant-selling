@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+<script>
+    {% if messages %}
+        {% for message in messages %}
+        Swal.fire({
+            title: "{{message}}",
+            icon: "{{message.tags}}",
+            timer:1800,
+        });
+        {% endfor %}
+    {% endif %}
+  
+  </script>
+
+
+
+{% if product %}  
+<section class="section cart">
+    <div class="container">
+        <div class="small-container cart-page">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Add to cart</th>
+                    <th>view</th>
+                </tr>
+                {% for i in product %}
+                <tr>
+                    <td>
+                        <div class="cart-info">
+                            <img src="{{i.product_id.image1.url}}">
+                            <div class="cart-details">
+                                <p>{{i.product_id.name | truncatewords:3}} </p>
+                                <large class="price">Price: {{i.product_id.orginal_price}}</large>
+                                <a href="{% url 'removewish' i.product_id.id %}">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><a href="{% url 'quickaddwish' i.product_id.id %}">Add to cart</a></td>
+                    <td><a href="{% url 'singleproduct' i.product_id.id %}">view product</a></td>
+                 </tr>
+                 {% endfor %}
+                </table>
+        </div>
+    </div>
+</section>
+
+
+{% else %}
+
+<section class="section cart">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body cart">
+                <div class="text-center">
+                    <img src="{% static 'images/undefined - Imgur.png' %}" width="160" height="130" >
+                    <h3><strong>Your wishlist is Empty</strong></h3>
+                    <div class="empty-cart">
+                        <a href="{% url 'allproduct' %}"><button class="empty-btn">Continue shopping</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+
+
+    <!-- foooter start -->
+    {% include 'footer.html' %}
+    <!-- footer end -->
+  
+  {% endblock %}

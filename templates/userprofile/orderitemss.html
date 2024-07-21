@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->   
+ 
+
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'assets/css/order.css' %}">
+
+<script>
+    {% if messages %}
+        {% for message in messages %}
+        Swal.fire({
+            title: "{{message}}",
+            icon: "{{message.tags}}",
+            timer:1800,
+        });
+        {% endfor %}
+    {% endif %}
+  
+  </script>
+
+<style>
+    .danger {
+        padding: 10px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        position: relative;
+        top: -50px;
+    }
+
+    .success {
+        padding: 10px;
+        background-color: green;
+        color: white;
+        opacity: 1;
+        position: relative;
+        top: -50px;
+    }
+    
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+        color: black;
+    }
+
+    .order-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
+    }
+
+    .card-header, .card-footer {
+        padding: 15px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .hh-grayBox {
+        padding-bottom: 30px;
+        padding-top:30px;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .media {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .media img {
+        width: 170px;
+        height: 150px;
+    }
+
+    .media-body {
+        flex: 1;
+        margin-right: 200px;
+    }
+
+    h5, h6 {
+        margin: 0;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .font-weight-bold {
+        font-weight: bold;
+    }
+
+    .media .row {
+        border-bottom: 2px solid #eaeaea;
+    }
+
+    .border-line {
+        border-right: 1px solid #eaeaea;
+    }
+
+    .border-line:last-child {
+        border-right: none;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .order-tracking {
+        text-align: center;
+        width: 33.33%;
+        position: relative;
+        display: block;
+    }
+
+    .order-tracking .is-complete {
+        display: block;
+        position: relative;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        border: 0px solid #AFAFAF;
+        background-color: #f7be16;
+        margin: 0 auto;
+        transition: background 0.25s linear;
+        z-index: 2;
+    }
+
+    .order-tracking .is-complete:after {
+        display: block;
+        position: absolute;
+        content: '';
+        height: 14px;
+        width: 7px;
+        top: -2px;
+        bottom: 0;
+        left: 5px;
+        margin: auto 0;
+        border: 0px solid #AFAFAF;
+        border-width: 0px 2px 2px 0;
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+
+    .card-body {
+        padding-bottom: 30px;
+    }
+
+    .order-tracking.completed .is-complete {
+        border-color: #27aa80;
+        border-width: 0px;
+        background-color: #27aa80;
+    }
+
+    .order-tracking.completed .is-complete:after {
+        border-color: #fff;
+        border-width: 0px 3px 3px 0;
+        width: 7px;
+        left: 11px;
+        opacity: 1;
+    }
+
+    .order-tracking p {
+        color: #A4A4A4;
+        font-size: 16px;
+        margin-top: 8px;
+        margin-bottom: 0;
+        line-height: 20px;
+    }
+
+    .order-tracking p span {
+        font-size: 14px;
+    }
+
+    .order-tracking.completed p {
+        color: #000;
+    }
+
+    .order-tracking::before {
+        content: '';
+        display: block;
+        height: 3px;
+        width: calc(100% - 40px);
+        background-color: #f7be16;
+        top: 13px;
+        position: absolute;
+        left: calc(-50% + 20px);
+        z-index: 0;
+    }
+
+    .order-tracking:first-child:before {
+        display: none;
+    }
+
+    .order-tracking.completed:before {
+        background-color: #27aa80;
+    }
+</style>
+
+<section class="section">
+    <div class="container order-container">
+        <div class="card-header">
+            <div class="row">
+                <div>
+                    <p class="text-muted">Order id&nbsp;{{ allorder.owner.id }} </p>
+                    &nbsp;
+                    <p class="text-muted">Order Total amount&nbsp;{{ allorder.owner.total_price }} </p>
+                    &nbsp;
+                    <p class="text-muted">Order date- {{ allorder.owner.order_date }}</p>
+                    &nbsp;
+                    <p class="text-muted"></p>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            
+            <div class="media">
+                <div class="row">
+                    <div class="media-body">
+                        <h3 class="font-weight-bold">{{ allorder.product.name }}</h3>
+                        &nbsp;
+                        <p class="text-muted"> Qt: {{ allorder.quantity }}</p>
+                        &nbsp;
+                        <p class="text-muted">Price:</p><h4 class="mt-3 mb-4">{{ allorder.product.orginal_price }}</h4>
+                        &nbsp;
+                        <h4 class="mt-3 mb-4"><p class="text-muted">Delivery date-</p> {{ allorder.delivery_date }}</h4>
+                        &nbsp;
+                    </div>
+                    <div class="pro-img">
+                        <img src="{{ allorder.product.image1.url }}" alt="Product Image">
+                        
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
+                    <div class="row justify-content-between">
+                        {% if allorder.item_status == 1 %}
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Ordered<br><span>{{allorder.owner.order_date}}</span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Shipped<br><span></span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Delivered<br><span>{{allorder.delivery_date}}</span></p>
+                        </div>
+                        {% endif %}
+                        {% if allorder.item_status == 2 %}
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Ordered<br><span>{{allorder.owner.order_date}}</span></p>
+                        </div>
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Shipped<br><span></span></p>
+                        </div>
+                        <div class="order-tracking">
+                            <span class="is-complete"></span>
+                            <p>Delivered<br><span>{{allorder.delivery_date}}</span></p>
+                        </div>
+                        {% endif %}
+                        {% if  allorder.item_status == 3 %}
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Ordered<br><span>{{allorder.owner.order_date}}</span></p>
+                        </div>
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Shipped<br><span></span></p>
+                        </div>
+                        <div class="order-tracking completed">
+                            <span class="is-complete"></span>
+                            <p>Delivered<br><span>{{allorder.delivery_date}}</span></p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    &nbsp;
+                    {% if  allorder.item_status == 4 %}
+                    <a ><h3 style="text-align:center;color:red">Order Canceld</h3></a>
+                    {% else %}
+                    <a href="{% url 'ordercancel' allorder.id %}"><h3 style="text-align:center">Order Cancel</h3></a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var success = document.getElementById('success');
+    var danger = document.getElementById('danger');
+    setTimeout(function () { 
+        success.style.display = 'none';
+    }, 3000); 
+    setTimeout(function () { 
+        danger.style.display = 'none';
+    }, 3000);
+</script>
+
+<!-- Footer start -->
+{% include 'footer.html' %}
+<!-- Footer end -->
+{% endblock %}

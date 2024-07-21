@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Life | Plant selling</title>
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="{% static 'images/hero-banner.png' %}" as="image">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  
+
+
+</head>
+
+<body>
+
+
+    {% block navbar %}
+    {% endblock navbar %}
+    {% block maincontent %}
+
+    {% endblock maincontent %}
+
+    {% block popupadd %}
+    
+    {% endblock popupadd %}
+
+    {% block sidebar %}
+    
+    {% endblock sidebar %}
+
+    
+    {% block loader %}
+    
+    {% endblock loader %}
+
+    
+
+
+
+    <!-- 
+      - ionicon link
+    -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'style.js' %}"></script>
+    <script src="{% static 'Verify.js' %}"></script>
+    <script src="https://kit.fontawesome.com/e89c04d720.js" crossorigin="anonymous"></script>
+    <script>
+
+        var loader=document.getElementById("loader");
+        var close=document.getElementById("close-icon");
+          window.addEventListener("load",function(){
+              loader.style.display="block"
+    
+          })
+    
+          close.addEventListener("click", function() {
+                closeloader();
+            });
+    
+            function closeloader(){
+                loader.style.display = "none";
+            }
+           
+      </script>
+    
+      <script>
+        setTimeout(function () { 
+  
+          // Closing the alert 
+          $('.alert').alert('close'); 
+      }, 2000); 
+
+     
+      </script>
+  
+  </body>
+  
+  </html>

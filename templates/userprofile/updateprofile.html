@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+    
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+
+
+<section class="section pro">
+      <div class="conatiner">
+<div class="update-profile">
+    <form method="POST" action="/editprofile/{{ username.id }}/" id="myForm">
+        {% csrf_token %}
+        {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="danger alert-danger" id="danger">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% else %}
+      <div class="success alert-success" id="success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% endif %}
+      {% endfor %}
+       <div class="flex">
+          <div class="inputBox">
+             <span>firstname :</span>
+             <input type="text" name="update_fname" value="{{username.first_name}}" class="box">
+             <span>lastname :</span>
+             <input type="text" name="update_lname" value="{{username.last_name}}" class="box">
+             
+          </div>
+          <div class="inputBox">
+            <span>your email :</span>
+            <input type="email" name="update_email" value="{{username.email}}"  class="box" disabled style="opacity:.8">
+             <span>your Phone number :</span>
+             <input type="number" name="update_number" placeholder="Enter phone number" {% if username.number %} value="{{ username.number }}" {% endif %} min="1"  maxlength="10" class="box">
+          </div>
+       </div>
+       <button type="submit" value="update profile" name="update_profile" class="btns">Update profile</button>
+       <a href="{% url 'userprofile' %}" class="delete-btn">go back</a>
+    </form>
+ 
+ </div>
+</div>
+ </section>
+
+ 
+ <script>
+    var success=document.getElementById('success');
+    var danger=document.getElementById('danger');
+    setTimeout(function () { 
+     success.style.display='none';
+  }, 3000); 
+  setTimeout(function () { 
+    danger.style.display='none';
+ }, 3000); 
+
+
+  </script>
+
+<!-- foooter start -->
+{% include 'footer.html' %}
+<!-- footer end -->
+  
+  {% endblock %}

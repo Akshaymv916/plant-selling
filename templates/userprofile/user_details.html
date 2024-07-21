@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+    
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+<style>
+  .danger {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    opacity:1;
+  }
+
+  .success{
+      padding: 10px;
+    background-color: green;
+    color: white;
+    opacity:1;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }
+  </style>
+
+<section class="section pro">
+    <div class="container">
+        <div class="profile">
+          {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="danger alert-danger" id="danger">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% else %}
+      <div class="success alert-success" id="success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <strong>{{message}}</strong> 
+      </div>
+      {% endif %}
+      {% endfor %}
+      <br>
+              <img src="{{username.profilepic.url}}">
+           <h3><i class="fa-solid fa-user"></i> &nbsp;{{username.first_name}}&nbsp;{{username.last_name}}</h3>
+           <h4><i class="fa-solid fa-envelope"></i>&nbsp;{{username.email}}</h4>
+           &nbsp;
+           {% if username.number %}
+           <h4><i class="fa-solid fa-phone"></i>&nbsp;{{username.number}}</h4>
+           {%endif%}
+           <a href="{% url 'updateprofile' %}" class="btns">update profile</a>
+           {% if length == 1 %} 
+           <a href="{% url 'viewaddress' %}" class="delete-btn">address</a>
+           {% else %}
+           <a href="{% url 'address' %}" class="delete-btn">add address</a>
+           {% endif %}
+        </div>
+     
+     </div>
+</section>
+
+<script>
+  var success=document.getElementById('success');
+  var danger=document.getElementById('danger');
+  setTimeout(function () { 
+   success.style.display='none';
+}, 3000); 
+setTimeout(function () { 
+  danger.style.display='none';
+}, 3000); 
+
+
+</script>
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+{% endblock %}

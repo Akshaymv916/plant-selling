@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->    
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/success.css' %}">
+
+
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    .content-box {
+      background-color: #fafafb;
+      box-shadow: 1px 4px 8px rgba(0,0,0,.15);
+      transition: all .3s ease-in-out;
+      padding: 16px;
+      padding-bottom: 16px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      height:auto;
+      width:500px;
+      align-items:center;
+      
+  }
+
+  .content-address h3{
+    margin-bottom:6px;
+  }
+
+  ._failed{ border-bottom: solid 4px red !important; }
+._failed i{  color:red !important;  }
+
+._success {
+    box-shadow: 0 15px 25px #00000019;
+    padding: 45px;
+    width: 100%;
+    text-align: center;
+    margin: 40px auto;
+    border-bottom: solid 4px #28a745;
+}
+
+._success i {
+    font-size: 55px;
+    color: #28a745;
+}
+
+._success h2 {
+    margin-bottom: 12px;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+._success p {
+    margin-bottom: 0px;
+    font-size: 18px;
+    color: #495057;
+    font-weight: 500;
+}
+  
+    </style>
+
+          <section class="section thankyou">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <div class="message-box _success _failed">
+                             <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            <h2> Your payment failed </h2>
+                        <p>  Try again later </p> 
+                 
+                    </div> 
+                </div> 
+            </div> 
+          
+        </div> 
+        </div> 
+            </div>      
+                       
+
+        </div>
+        </section>
+
+
+          
+
+    <script>
+        var success=document.getElementById('success');
+        var danger=document.getElementById('danger');
+        setTimeout(function () { 
+         success.style.display='none';
+      }, 3000); 
+      setTimeout(function () { 
+        danger.style.display='none';
+     }, 3000); 
+
+    
+
+      </script>
+  
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+<!-- END nav -->   
+ 
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<script>
+  {% if messages %}
+      {% for message in messages %}
+      Swal.fire({
+          title: "{{message}}",
+          icon: "{{message.tags}}",
+          timer:1500,
+      });
+      {% endfor %}
+  {% endif %}
+
+</script>
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+
+<section id="main-container" class="section">
+    <!-- Signup Form -->
+
+  
+      
+
+    <div id="signup-form">
+      <div class="avatar-container">
+        <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <label for="imageUpload" class="avatar-label-container">
+            <div class="avatar-image-container">
+                <img class="avatar-preview-image" />
+                <i class="fa-solid fa-user avatar-default-icon"></i>
+            </div>
+        </label>
+        <input
+            onchange="handleImage(event)"
+            type="file" 
+            class="avatar-upload-input"
+            name="imageUpload"
+            id="imageUpload"
+            accept=".jpg, .jpeg, .png, .svg" required/>                
+    </div>
+        
+
+        <div class="user-container">
+            <label>First name</label>
+            <input type="text" placeholder="Fist name..." id="username" name="fname" required/>
+        </div>
+
+        <div class="user-container">
+            <label>Last name</label>
+            <input type="text" placeholder="Last name..." id="username" name="lname" required/>
+        </div>
+
+        <div class="user-container">
+            <label>Phone number</label>
+            <input type="number" placeholder="Enter phone..." min="0" id="username" name="phone" required/>
+        </div>
+
+        <div class="email-container">
+            <label>Email address</label>
+            <input type="text" placeholder="Email address..." id="email" name="email" required/>
+        </div>
+        <div id="password-container">
+            <label>Password</label>
+            <div id="password-elements">
+                <input type="password" placeholder="Password..." id="password" name="password" required/>
+                <i class="fa-solid fa-eye-slash" id="eye-icon"></i>
+            </div>
+        </div>
+        <button id="signup-btn" type="submit">signup</button>
+    </div>
+</form>
+    <hr class="bottom-line">
+    <!-- Sign Up -->
+    <div id="login-section">
+        <h3>Already have an account ?</h3>
+        <a href="{% url 'login' %}"><button id="login-btn">Login </button></a>
+    </div>
+
+  </section>
+
+  <script>
+    var success=document.getElementById('success');
+    var danger=document.getElementById('danger');
+    setTimeout(function () { 
+     success.style.display='none';
+  }, 3000); 
+  setTimeout(function () { 
+    danger.style.display='none';
+ }, 3000); 
+
+
+  </script>
+
+
+  <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+
+
+  {% endblock %}

@@ -1,0 +1,161 @@
+{% load static %}
+{% load gettotal %}
+
+
+<header class="header" data-header>
+    <div class="container">
+
+      <div class="overlay" data-overlay></div>
+
+      <a href="/" class="logo">
+        <h1 style="color:#1ed760">Green Life🌱</h1>
+      </a>
+
+      <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <h1>Green Life</h1>
+
+        </a>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="/" class="navbar-link">Home</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="{% url 'about' %}" class="navbar-link">About</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="{% url 'allproduct' %}" class="navbar-link">Products</a>
+          </li>
+
+
+          <li class="navbar-item">
+            <a href="{% url 'contact' %}" class="navbar-link">Contact</a>
+          </li>
+
+          <li class="nav-action-text navbar-item">
+            <a href="{% url 'userprofile' %}" class="navbar-link">My Profile</a>
+          </li>
+
+          <li class="nav-action-text navbar-item">
+            <a href="{% url 'myorders' %}" class="navbar-link">My orders</a>
+          </li>
+
+          <li class="nav-action-text navbar-item">
+            <a href="{% url 'wishlist' %}" class="navbar-link">My wishlist</a>
+          </li>
+
+          <li class="nav-action-text navbar-item">
+            <a href="{% url 'ordertrack' %}" class="navbar-link">Order status</a>
+          </li>
+        </ul>
+
+        <ul class="nav-action-list">
+
+          <li>
+            <div class="header-action">
+
+              <div class="search-wrapper" data-search-wrapper>
+    
+                <button class="header-action-btn" aria-label="Toggle search" data-search-btn>
+                  <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                  <ion-icon name="close-outline" class="close-icon"></ion-icon>
+                </button>
+    
+                <div class="input-wrapper">
+                  <form action="search/" method="get">
+                    {% csrf_token %}
+                    <input type="search" name="query" placeholder="Search here" id="query" class="search-input">
+    
+                  <button class="search-submit" aria-label="Submit search">
+                    <ion-icon name="search-outline"></ion-icon>
+                  </button>
+                </form>
+                </div>
+    
+              </div>
+          </li>
+
+          <li>
+            <button class="nav-action-btn" >
+              <ion-icon name="person-outline" aria-hidden="true" ></ion-icon>
+
+              <a href="{% url 'login' %}"><span class="nav-action-text">Login / Register</span></a>
+
+            </button>
+
+            <div class="user-menu">
+              <ul>
+                {% if 'users' in request.session %}
+                <li><a href="{% url 'userprofile' %}"><i class="ph-bold ph-user"></i>&nbsp;Profile</a></li>
+                <li><a href="{% url 'myorders' %}"><i class="ph-bold ph-gear-six"></i>&nbsp;My orders</a></li>
+                <li><a href="{% url 'wishlist' %}"><i class="ph-bold ph-gear-six"></i>&nbsp;My wishlist</a></li>
+                <li><a href="{% url 'ordertrack' %}"><i class="ph-bold ph-question"></i>&nbsp;Order status</a></li>
+                <li><a href="{% url 'logout' %}"><i class="ph-bold ph-sign-out"></i>&nbsp;Sign Out</a></li>
+                <hr style="opacity:.3">
+                <li><a href="" style="color:red;"><i class="ph-bold ph-sign-out"></i>{{username.first_name}}</a></li>
+                {% else  %}
+                <li><a href="{% url 'login' %}"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Login/Register</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </li>
+
+          <li>
+            <button class="nav-action-btn" data-panel-btn="wishlist">
+              <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+
+              <span class="nav-action-text" >Wishlist</span>
+              {% if 'users' in request.session %}
+              {% if wish.count == 0 %}
+              <data class="nav-action-badge" value="5" aria-hidden="true">0</data>
+              {% else %}
+              <data class="nav-action-badge" value="5" aria-hidden="true">{{wish.count}}</data>
+              {% endif %}
+              {% else %}
+              <data class="nav-action-badge" value="5" aria-hidden="true">0</data>
+              {% endif %}
+            </button>
+          </li>
+
+          <li>
+            <button class="nav-action-btn" data-panel-btn="cart">
+              <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
+              {% if 'users' in request.session %}
+              <data class="nav-action-text" value="318.00">Cart: <strong></strong></data>
+              {% if cart.added_items.count == 0 %}
+              <data class="nav-action-badge" value="4" aria-hidden="true">0</data>
+              {% else %}
+              <data class="nav-action-badge" value="4" aria-hidden="true">{{cart.added_items.count}}</data>
+              {% endif %}
+              {% else %}
+              <data class="nav-action-text" value="318.00">Cart: <strong></strong></data>
+              <data class="nav-action-badge" value="4" aria-hidden="true">0</data>
+              {% endif %}
+            </button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+    </div>
+  </header>
+
+    <!-- side panel -->
+     
+  

@@ -1,0 +1,48 @@
+
+
+.pro-filter {
+
+	position: relative;
+    padding-bottom: 20px;
+	display: flex;
+
+}
+
+.pro-filter select {
+
+	border: 2px solid #d4d1d1;
+
+	padding: 13px 20px;
+    margin: 10px;
+	display: inline-block;
+
+	text-transform: uppercase;
+
+	font-size: 13px;
+
+	letter-spacing: 2px;
+
+	line-height: 1;
+
+	color: #6f7172;
+
+	appearance: none;
+
+	-moz-appearance: none;
+
+	width: 185px;
+
+	font-weight: 600;
+
+}
+
+
+
+.pro-filter h4{
+	opacity:0.6;
+	padding-top: 20px;
+	position: relative;
+	left: 320px;
+	font-size:16px;
+	top: 15px;
+}

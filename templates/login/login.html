@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- navbar start -->
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block sidebar %}
+{% include 'sidebar.html' %}
+{% endblock sidebar %}
+
+<!-- END nav -->    
+
+{% block maincontent %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<script>
+  {% if messages %}
+      {% for message in messages %}
+      Swal.fire({
+          title: "{{message}}",
+          icon: "{{message.tags}}",
+          timer:1300,
+      });
+      {% endfor %}
+  {% endif %}
+
+</script>
+
+
+<style>
+    .danger {
+      padding: 10px;
+      background-color: #f44336;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+
+    .success{
+        padding: 10px;
+      background-color: green;
+      color: white;
+      opacity:1;
+      position: relative; 
+        top: -50px; 
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+  
+<section id="main-container" class="section"> 
+
+    <!-- Login Form -->
+    <div id="login-form">
+        <form action="{% url 'signin' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="email-container">
+            <label>Email address</label>
+            <input type="text" placeholder="Email address..." id="email" name="email" required style="background-color: white;
+    color:black;"/>
+        </div>
+        <div id="password-container">
+            <label>Password</label>
+            <div id="password-elements">
+                <input type="password" placeholder="Password..." id="password" name="password" required style="background-color: white;
+    color:black;"/>
+                <i class="fa-solid fa-eye-slash" id="eye-icon"></i>
+            </div>
+        </div>
+
+        <div id="checkbox-login-container">
+            <div>
+                <a href="{% url 'forgetpass' %}"><p class="forgot-paragraph">Forgot your password?</p></a>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="check-box" checked>
+                    <p>Remember me</p>
+                </div>
+            </div>
+            <button id="login-btn" type="submit">LOG IN</button>
+        </div>
+    </form>
+    </div>
+    <hr class="bottom-line">
+    <!-- Sign Up -->
+    <div id="sign-up-section">
+        <h3>Don't have an account ?</h3>
+        <a href="{% url 'register' %}"><button id="signup-btn">Sign up </button></a>
+    </div>
+    </section>
+
+    <script>
+        var success=document.getElementById('success');
+        var danger=document.getElementById('danger');
+        setTimeout(function () { 
+         success.style.display='none';
+      }, 3000); 
+      setTimeout(function () { 
+        danger.style.display='none';
+     }, 3000); 
+
+
+      </script>
+  
+
+    <!-- foooter start -->
+  {% include 'footer.html' %}
+  <!-- footer end -->
+
+{% endblock %}
