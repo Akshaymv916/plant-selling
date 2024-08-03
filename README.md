@@ -72,8 +72,14 @@ This is a full-featured e-commerce platform for selling indoor plants, developed
 - Integration with Razorpay for secure and seamless transactions.
 - Users can pay for their orders directly through the platform.
 
-#
-## Contact
+![Description of the image](static/IMG_20240803_161030.jpg)
+
+![Description of the image](static/IMG_20240803_161042.jpg)
+
+
+
+
+# Contact
 For any inquiries or support, please contact [akshaychathanzz2000@gmail.com].
 
 ---
