@@ -72,15 +72,10 @@ This is a full-featured e-commerce platform for selling indoor plants, developed
 - Integration with Razorpay for secure and seamless transactions.
 - Users can pay for their orders directly through the platform.
 
-## Contributing
-Contributions are welcome! Please open an issue or submit a pull request for any changes or improvements.
-
-## License
-This project is licensed under the MIT License.
-
+#
 ## Contact
-For any inquiries or support, please contact [your email].
+For any inquiries or support, please contact [akshaychathanzz2000@gmail.com].
 
 ---
 
-Developed by [Your Name]
+Developed by [Akshay mv]
